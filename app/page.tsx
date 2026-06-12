@@ -31,7 +31,7 @@ export default function Home() {
       <section className="heroSection">
         <div className="inner">
           <h1 className="text-5xl md:text-6xl font-bold text-center text-orange ft-deacon">
-            Affordable SAT Prep from students at Columbia, Yale, Harvard, and UT.
+            Affordable SAT Prep from students at Columbia, Yale, Harvard, UT, and A&M.
             $30/hour.
           </h1>
           <br />
