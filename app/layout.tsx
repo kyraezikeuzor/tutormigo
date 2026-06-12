@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://tutormigo.com"),
+  metadataBase: new URL("https://tutormigo.vercel.app"),
   title: "Tutormigo — Elite SAT Tutoring",
   description:
     "Affordable SAT prep from students at Columbia, Yale, Harvard, and UT. $30/hour. SAT/ACT prep, academic mentorship, and college admissions consulting.",
@@ -10,7 +10,7 @@ export const metadata: Metadata = {
     title: "Tutormigo — Elite SAT Tutoring",
     description:
       "Affordable SAT prep from Ivy & T20 students. Free first session. 1550+ avg tutor scores.",
-    url: "https://tutormigo.com",
+    url: "https://tutormigo.vercel.app",
     siteName: "Tutormigo",
     type: "website",
     images: [
