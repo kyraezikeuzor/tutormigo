@@ -1,7 +1,4 @@
 export type Stat = { number: string; label: string };
-export type PlaceImpact = { city: string; country: string };
-export type Photo = { src: string; alt: string };
-export type DonateTier = { amount: string; label: string };
 export type Cta = { label: string; href: string };
 export type Detail = { heading: string; text: string };
 
@@ -13,159 +10,322 @@ export type AccordionItem = {
   cta?: Cta;
 };
 
-export type SocialLink = {
-  platform: string;
-  icon: "ig" | "li" | "tt" | "email";
-  href: string;
+export type Service = { title: string; description: string };
+
+export type Tutor = {
+  name: string;
+  photo: string;
+  college: string;
+  collegeLogo: string;
+  credentials: string[];
+};
+
+export type Founder = {
+  name: string;
+  photo: string;
+  bio: string;
+  email: string;
 };
 
 export type SiteData = {
-  hero: { tagline: string; subline: string; donateLabel: string; donateLink: string };
-  about: { body: string };
+  hero: { ctaLabel: string; ctaLink: string };
   impact: {
     stats: Stat[];
-    highlights: string[];
-    countries: string[];
-    states: string[];
-    placeImpact: PlaceImpact[];
   };
-  gallery: { heading: string; photos: Photo[] };
-  donateTiers: DonateTier[];
-  getInvolved: AccordionItem[];
-  programs: AccordionItem[];
-  social: SocialLink[];
+  founder: Founder;
+  tutors: Tutor[];
+  services: Service[];
+  referral: AccordionItem;
+  faqs: AccordionItem[];
+  contact: { email: string };
 };
 
 export const SITE: SiteData = {
   hero: {
-    tagline: "Omelora means #Changemaker.",
-    subline:
-      "Join 1,500 young people bridging gaps in education through kits, books, letters, and mentorship. All youth-led, all real impact.",
-    donateLabel: "Donate",
-    donateLink: "https://givebutter.com/kfk2025", // ← replace
-  },
-
-  about: {
-    body: `The name Omelora means "changemaker" in Igbo, an African language. We believe young people can create real change in their communities when given the tools, trust, and opportunity to lead. Omelora was founded by Kyra Ezikeuzor, a Nigerian-American student from Houston, Texas, after learning that orphans in Nigeria lacked basic school supplies. Witnessing deep scarcity alongside abundance made clear that young people have both the empathy and the capacity to close these gaps when given the chance.`,
+    ctaLabel: "Book Free Session",
+    ctaLink: "https://chip-era-331.notion.site/364234e7224a80269b73fd3baa4d1ed0?pvs=105",
   },
 
   impact: {
     stats: [
-      { number: "1,500", label: "Volunteers" },
-      { number: "40",    label: "Ambassadors" },
-      { number: "34",    label: "Countries" },
-      { number: "300",   label: "Impacted" },
-    ],
-    highlights: [
-      "2 mini libraries built",
-      "30 laptops delivered to an orphanage in Nigeria",
-      "100 care kits donated to the Door Bronx Youth Center",
-      "Projects in Houston, NYC, Nigeria, Uganda, and Indonesia",
-    ],
-    countries: [
-      "Afghanistan","Albania","Algeria","Argentina","Australia","Bangladesh",
-      "Bolivia","Brazil","Cameroon","Canada","Chile","China","Colombia",
-      "DR Congo","Ecuador","Egypt","Ethiopia","France","Germany","Ghana",
-      "India","Indonesia","Italy","Jamaica","Japan","Jordan","Kenya",
-      "Mexico","Morocco","Nepal","Nigeria","Pakistan","Peru","Philippines",
-      "Rwanda","Senegal","South Africa","Spain","Tanzania","Uganda",
-      "Ukraine","United Kingdom","United States","Venezuela","Vietnam",
-      "Zambia","Zimbabwe",
-    ],
-    states: [
-      "Alabama","Arizona","California","Colorado","Connecticut","Florida",
-      "Georgia","Illinois","Indiana","Louisiana","Maryland","Massachusetts",
-      "Michigan","Minnesota","New Jersey","New York","North Carolina",
-      "Ohio","Pennsylvania","Tennessee","Texas","Virginia","Washington",
-    ],
-    placeImpact: [
-      { city: "Enugu",   country: "Nigeria" },
-      { city: "Kampala", country: "Uganda" },
+      { number: "1550", label: "Tutor SAT Score" },
+      { number: "$25", label: "Per Hour With Referral" },
+      { number: "FREE", label: "First Session" },
+      { number: "83%", label: "Cheaper Than Ivy Standard" },
+      
     ],
   },
 
-  gallery: {
-    heading: "In the Field",
-    // Add real image paths under /public — e.g. src: "/photos/volunteers.jpg"
-    photos: [
-      { src: "/imgs/books.jpg", alt: "Book donations" },
-      { src: "/imgs/fundraiser.png", alt: "Fundraiser" },
-      { src: "/imgs/mlsf.jpg", alt: "Kids at Kampala, Uganda" },
-    ],
+  // Add photo under /public/imgs/founder/
+  founder: {
+    name: "Kyra Ezikeuzor",
+    photo: "/imgs/founder/kyra-e.png",
+    bio: "I'm a rising sophomore at Columbia and scored a 1560, but honestly the whole SAT/college prep process was a lot to figure out. So my friends from Columbia, Yale, and Harvard and I wanted to give back. We're offering free 30-min calls this week to help families think through summer prep. If you have a high schooler and that sounds helpful, just contact me and we'll find a time!",
+    email: "koe2103@columbia.edu",
   },
 
-  donateTiers: [
-    { amount: "$3",   label: "Donate 1 kid's book" },
-    { amount: "$5",   label: "Donate 1 school kit" },
-    { amount: "$10",  label: "Sponsor 1 kid's laptop" },
-    { amount: "$50",  label: "Sponsor 10 school kits" },
-    { amount: "$150", label: "Sponsor a STEM workshop" },
-    { amount: "$300", label: "Sponsor a computer lab" },
-  ],
-
-  getInvolved: [
+  // Add college logos under /public/imgs/colleges/
+  tutors: [
     {
-      id: "volunteer",
-      label: "How to Volunteer",
-      body: "Volunteering with Omelora is flexible and open to everyone. Earn hours by contributing to our programs from wherever you are.",
-      details: [
-        {
-          heading: "Supplies and Arts",
-          text: "Create letters, coloring pages, bookmarks, and workbooks that go directly to youth in partner communities. All submissions are reviewed monthly and distributed to our NGO partners.",
-        },
-        {
-          heading: "Events and Fundraisers",
-          text: "Join power-hours, visit days, webinars, and fundraising campaigns. Every event is a chance to make a connection and grow our reach.",
-        },
+      name: "Asia Genawi",
+      photo: "/imgs/tutors/asia-g.png",
+      college: "Columbia University",
+      collegeLogo: "",
+      credentials: [
+        "SAT 1550 (800 Math, 750 Reading)",
+        "Coca-Cola Scholar",
+        "AI + Quantum Physics Researcher, Columbia GILM Lab & Yale Wright Lab",
       ],
-      cta: { label: "Apply to Volunteer", href: "https://docs.google.com/forms/d/e/1FAIpQLSeg2098KJYe4yq0qPFS2WWnEuxTXskMYDahOEfMwSDWgjWPDQ/viewform" },
     },
     {
-      id: "donate",
-      label: "Donate to Support",
-      body: "Every dollar goes toward getting real resources into the hands of young people who need them most. From school kits to laptops to mini libraries. Even small amounts go a long way — three dollars donates a book, five dollars sends a full school kit.",
-      cta: { label: "Give Now", href: "https://givebutter.com/kfk2025" },
+      name: "Prisca Agbeyibor",
+      photo: "/imgs/tutors/prisca-a.png",
+      college: "Barnard College of Columbia University",
+      collegeLogo: "",
+      credentials: [
+        "SAT Reading 700",
+        "Ron Brown Scholarship Award",
+        "College Board African American Scholar",
+        "National Archives Intern",
+      ],
+    },
+    {
+      name: "Emily Igwike",
+      photo: "/imgs/tutors/emily-i.png",
+      college: "Harvard University",
+      collegeLogo: "",
+      credentials: ["HS Salutatorian", "National Poet", "5s on 7 AP Exams"],
+    },
+    {
+      name: "Teresa Sillah",
+      photo: "/imgs/tutors/teresa-s.png",
+      college: "Texas A&M",
+      collegeLogo: "",
+      credentials: [
+        "4.00 GPA in Public Health",
+        "Peer Mentor for First-Gen Students",
+        "Distinguished Honor Roll",
+      ],
+    },
+    {
+      name: "Aishah Salman",
+      photo: "/imgs/tutors/aishah-s.png",
+      college: "Yale University",
+      collegeLogo: "",
+      credentials: ["1480 SAT", "Google Code Next Scholar"],
+    },
+    {
+      name: "Blythe Bath",
+      photo: "/imgs/tutors/blythe-b.png",
+      college: "Georgetown University",
+      collegeLogo: "",
+      credentials: ["36 ACT", "HS Valedictorian", "National Merit"],
+    },
+    {
+      name: "Alanna Denault",
+      photo: "/imgs/tutors/alanna-d.png",
+      college: "Columbia University",
+      collegeLogo: "",
+      credentials: ["35 ACT", "NYC Parks Intern", "5s on 7 AP Exams"],
+    },
+    {
+      name: "Eliana Igwike",
+      photo: "/imgs/tutors/eliana-i.png",
+      college: "Washington University in St. Louis",
+      collegeLogo: "",
+      credentials: [
+        "Nonprofit Founder",
+        "Yale Science Award",
+        "Science Researcher",
+      ],
+    },
+    {
+      name: "Oyenike Oladapo-Ekundayo",
+      photo: "/imgs/tutors/nike-o.png",
+      college: "Columbia University",
+      collegeLogo: "",
+      credentials: [
+        "1530 SAT",
+        "5s on 6 AP Exams",
+        "Laidlaw Research Scholar",
+        "Columbia Social Work Research Lab",
+      ],
+    },
+    {
+      name: "Elizabeth Ogbonnaya",
+      photo: "/imgs/tutors/elizabeth-o.png",
+      college: "Columbia University",
+      collegeLogo: "",
+      credentials: [
+        "NCNW Achievers Award Recipient",
+        "AP Scholar & College Board Recognition",
+        "Columbia ACComPLISHED Advisor",
+        "SHIP Health Internship",
+      ],
+    },
+    {
+      name: "Emanuela Adeyemi",
+      photo: "/imgs/tutors/emanuela-a.png",
+      college: "Columbia University",
+      collegeLogo: "",
+      credentials: [
+        "Mock Trial Awards",
+        "Math Mastery",
+        "Great SAT Reading",
+      ],
+    },
+    {
+      name: "Jenna Beyer",
+      photo: "/imgs/tutors/jenna-b.png",
+      college: "University of Texas at Austin",
+      collegeLogo: "",
+      credentials: [
+        "34 ACT",
+        "4.5 GPA & 4.0",
+        "National Merit",
+        "Honors Program",
+      ],
+    },
+    {
+      name: "Favour Olagunju",
+      photo: "/imgs/tutors/favour-o.png",
+      college: "Columbia University",
+      collegeLogo: "",
+      credentials: ["1500 SAT", "College Board Tutor", "Columbia Scholar"],
+    },
+    {
+      name: "Anjana Sethi",
+      photo: "/imgs/tutors/anjana-s.png",
+      college: "Baylor University",
+      collegeLogo: "",
+      credentials: [
+        "Graduate Cum Laude, St. Agnes Academy",
+        "Reynolds and Reynolds Internship",
+        "Dean's List at Baylor University",
+      ],
+    },
+    {
+      name: "Wambui Nyiha",
+      photo: "/imgs/tutors/wambui-n.png",
+      college: "Barnard College of Columbia University",
+      collegeLogo: "",
+      credentials: [
+        "34 ACT",
+        "Davis UWC Scholar",
+        "Phillips Academy Andover",
+        "Dean's List, 3.9 GPA",
+        "Columbia Zuckerman Institute Researcher",
+      ],
+    },
+    {
+      name: "Nadia Dawlett",
+      photo: "/imgs/tutors/nadia-d.png",
+      college: "Trinity University",
+      collegeLogo: "",
+      credentials: [
+        "Magna Cum Laude, St. Agnes Academy",
+        "Math Excellence Award",
+        "$132K Murchison Scholarship",
+        "English Course TA",
+        "AKPsi Business Fraternity",
+      ],
+    },
+    {
+      name: "Iman Ali",
+      photo: "/imgs/tutors/iman-a.png",
+      college: "George Washington University",
+      collegeLogo: "",
+      credentials: [
+        "Presidential Volunteer Service Award",
+        "National Honor Society",
+        "Senate Recognition for Community Service",
+        "Presidential Academic Scholarship",
+      ],
+    },
+    {
+      name: "Alyssia Huang",
+      photo: "/imgs/tutors/alyssia-h.png",
+      college: "Columbia University",
+      collegeLogo: "",
+      credentials: [
+        "NYU Researcher",
+        "Civil Engineering",
+        "Nonprofit & Women's Health Advocate",
+      ],
+    },
+    {
+      name: "Alegria Silvi",
+      photo: "/imgs/tutors/alegria-s.png",
+      college: "Columbia University",
+      collegeLogo: "",
+      credentials: [
+        "33 ACT",
+        "DC Think Tank Internship",
+        "Dean's List at Columbia",
+        "Salutatorian, Sonoma Valley HS (13 APs, 4.5 GPA)",
+      ],
     },
   ],
 
-  programs: [
+  services: [
     {
-      id: "campaigns",
-      label: "Campaigns",
-      body: "Each month, Omelora runs a focused campaign tied to a specific partner, school, or region. We connect already available resources like used books, laptops, and school supplies to learning centers that need them most. Our volunteers power these campaigns through fundraising, drives, and outreach, and 95% of every dollar raised goes directly to the cause.",
+      title: "College Consulting",
+      description:
+        "Standout resume building and admissions strategy.",
     },
     {
-      id: "mentorship",
-      label: "Mentorship",
-      body: "The Omelora Mentorship Program connects young volunteers with youth in local and global communities through monthly workshops on health literacy, environmental literacy, and technology literacy. Both in-person and virtual formats are available. All mentors receive ready-to-use slides, printed guides, and a recorded orientation. Minimum commitment is 2 to 3 hours a month for at least 3 months.",
+      title: "College Essay Prep",
+      description:
+        "Authentic personal statements and supplemental essay editing.",
     },
     {
-      id: "ambassadors",
-      label: "Ambassadors",
-      body: "Ambassadors are Omelora's frontline leaders. They represent us in their schools, cities, and communities by organizing fundraisers, building partnerships, and spreading our mission. With 40 active ambassadors, our collective goal is $1,000 raised each month. Ambassadors earn verified service hours and leadership recognition in return.",
-      cta: { label: "Apply to Be an Ambassador", href: "https://docs.google.com/forms/d/e/1FAIpQLScqqdCssbgSu1xCLMojkYiCK7ZBfA1zyGulR5Tnr7RGamNw4A/viewform?usp=header" },
+      title: "Digital SAT Prep & ACT",
+      description:
+        "High-impact strategy drills to eliminate testing anxiety and unlock top scores.",
     },
     {
-      id: "pages",
-      label: "Pages",
-      body: "The Omelora Pages Program is where our volunteers become creators. We partner with NGOs who have strong educational content that isn't reaching kids. Our network adapts their reports and resources into youth-ready, offline-accessible workbooks, activity sheets, coloring pages, and bookmarks over 3 to 4 weeks using our shared Canva workspace.",
+      title: "Mathematics",
+      description:
+        "Curriculum preview and support for Pre-Algebra, Algebra 1, Geometry, Pre-Calculus, and Calculus.",
     },
     {
-      id: "chapters",
-      label: "Chapters",
-      body: "Omelora Chapters bring the mission local. Each chapter is a youth-led team that organizes at least one supply drive and one fundraiser per semester, meets monthly for hands-on activities like letter making and kit packing, and donates directly to local youth learning centers. Chapter leaders earn volunteer hours for every event they run.",
+      title: "Scholarship Help",
+      description:
+        "Targeted guidance on finding, applying for, and winning merit and need-based scholarships.",
     },
     {
-      id: "events",
-      label: "Events",
-      body: "From virtual workshops to in-person visit days, Omelora hosts events that bring people together around education, wellness, and youth leadership. Every event is an opportunity to volunteer, learn, connect, and contribute. Check our Instagram and TikTok for upcoming dates and registration links.",
+      title: "AP Tutoring",
+      description:
+        "Course support and exam prep across AP subjects to build confidence and earn college credit.",
     },
   ],
 
-  social: [
-    { platform: "Instagram", icon: "ig",    href: "https://instagram.com/omeloraproject" },
-    { platform: "LinkedIn",  icon: "li",    href: "https://linkedin.com/company/omelora" },
-    { platform: "TikTok",    icon: "tt",    href: "https://tiktok.com/@omeloraproject" },
-    { platform: "Email",     icon: "email", href: "mailto:contact@omelora.org" },
+  referral: {
+    id: "referral",
+    label: "Referral Program",
+    body: "Refer a friend and unlock $25/hour tutoring — our best rate. To get your referral code, email koe2103@columbia.edu or call us. When your referral applies, they must mention they were referred by you.",
+    cta: { label: "Get Your Referral Code", href: "mailto:koe2103@columbia.edu" },
+  },
+
+  faqs: [
+    {
+      id: "ages",
+      label: "What ages can tutoring be done for?",
+      body: "Middle school (6th grade) through 12th grade is recommended. We tailor sessions to each student's level and goals.",
+    },
+    {
+      id: "inperson",
+      label: "Do you do in-person tutoring?",
+      body: "For now, sessions are virtual only. In-person tutoring in the Houston, TX area may be available starting summer 2026.",
+    },
+    {
+      id: "trust",
+      label: "How do I know I can trust you?",
+      body: "Our tutors attend elite Ivy League and T20 schools, have won hundreds of thousands in scholarships, scored perfect SAT math scores and 1530+ SAT scores, and bring additional experience in career planning and college admissions.",
+    },
   ],
+
+  contact: {
+    email: "koe2103@columbia.edu",
+  },
 };

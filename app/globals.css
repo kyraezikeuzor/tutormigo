@@ -37,12 +37,14 @@
 }
 
 :root {
-  --orange:   #f48925; /* #F4581A;*/
-  --orange-dk: #D94210;
+  --blue:      #2689ef;
+  --blue-dk:   #1a6fc7;
   --white:     #FFFFFF;
   --offwhite:  #FFF4EE;
   --ink:       #1A0A00;
   --rule:      rgba(255, 255, 255, 0.22);
+  --orange:    var(--blue);
+  --orange-dk: var(--blue-dk);
   --font-head: {
     font-family: "Deacon", serif;
     font-optical-sizing: auto;
@@ -58,7 +60,7 @@
 html { scroll-behavior: smooth; }
 
 body {
-  background: var(--orange);
+  background: var(--blue);
   color: var(--white);
   font-family: var(--font-body);
   font-size: 1rem;
@@ -87,24 +89,20 @@ section {
 
 /* ── Donate float ── */
 .donateFloat {
-  position: fixed;
-  top: .5rem;
-  right: var(--pad);
-  z-index: 999;
-  background: var(--white);
-  color: var(--orange-dk);
+  background: rgba(255, 255, 255, 0.12);
+  color: #ffffff;
   font-family: "Deacon", sans-serif;
   text-transform: uppercase;
   font-size: 1.3rem;
   padding: 0.5rem 1.5rem 0.45rem;
   text-decoration: none;
-  border: 2px solid var(--white);
+  border: 1.5px solid rgba(255, 255, 255, 0.35);
   border-radius: 52px;
-  transition: background 0.2s, color 0.2s, transform 0.15s;
+  white-space: nowrap;
+  transition: opacity 0.15s, transform 0.12s;
 }
 .donateFloat:hover {
-  background: var(--orange-dk);
-  color: var(--white);
+  opacity: 0.65;
   transform: translateY(-1px);
 }
 
@@ -116,14 +114,19 @@ section {
   background: var(--orange);
   border-bottom: 1.5px solid rgba(255, 255, 255, 0.28);
   padding: 0.85rem var(--pad);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 .logo {
   font-family: "Deacon", sans-serif;
   font-size: 1.8rem;
-  text-transform: uppercase;
   color: var(--white);
   text-decoration: none;
   font-weight: 700;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
 }
 
 /* ── Hero ── */
@@ -269,6 +272,144 @@ section {
   white-space: nowrap;
 }
 
+/* ── Founder ── */
+.founderSection { padding: 3.5rem 0; }
+.founderRow {
+  display: flex;
+  align-items: flex-start;
+  gap: 2rem;
+}
+.founderProfile {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex-shrink: 0;
+  width: 160px;
+}
+.founderPhoto {
+  position: relative;
+  flex-shrink: 0;
+  width: 160px;
+  height: 160px;
+  border-radius: 50%;
+  overflow: hidden;
+  background: rgba(255, 255, 255, 0.1);
+  border: 2px solid rgba(255, 255, 255, 0.3);
+}
+.founderPhotoPlaceholder {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  font-family: "Athletics", sans-serif;
+  font-size: 0.85rem;
+  color: rgba(255, 255, 255, 0.5);
+  padding: 1rem;
+}
+.founderBio {
+  flex: 1;
+  font-family: "Athletics", sans-serif;
+  font-size: 1.2rem;
+  font-weight: 300;
+  color: rgba(255, 255, 255, 0.88);
+  line-height: 1.7;
+}
+.founderBio p { margin-bottom: 0.75rem; }
+
+/* ── Tutors ── */
+.tutorsSection { padding: 3.5rem 0; }
+.tutorsGrid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.25rem;
+}
+.tutorCard {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.85rem;
+}
+.tutorProfile {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex-shrink: 0;
+  width: 88px;
+}
+.tutorAvatar {
+  position: relative;
+  width: 72px;
+  height: 72px;
+}
+.tutorAvatarInner {
+  width: 72px;
+  height: 72px;
+  border-radius: 50%;
+  overflow: hidden;
+  background: rgba(255, 255, 255, 0.1);
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  position: relative;
+}
+.tutorAvatarPlaceholder {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.6rem;
+  text-align: center;
+  color: rgba(255, 255, 255, 0.5);
+  padding: 0.25rem;
+}
+.tutorCollegeLogo {
+  position: absolute;
+  bottom: -4px;
+  right: -4px;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: var(--white);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  border: 1.5px solid rgba(255, 255, 255, 0.5);
+}
+.tutorName {
+  font-family: "Athletics", sans-serif;
+  font-size: 0.85rem;
+  margin-top: 0.4rem;
+  text-align: center;
+  color: var(--white);
+}
+.tutorCredentials {
+  flex: 1;
+  list-style: disc;
+  padding: 0.75rem 1rem 0.75rem 1.5rem;
+  background: rgba(0, 0, 0, 0.18);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 8px;
+  font-family: "Athletics", sans-serif;
+  font-size: 0.9rem;
+  color: rgba(255, 255, 255, 0.88);
+}
+.tutorCredentials li { margin-bottom: 0.15rem; }
+.tutorCredentials li:last-child { margin-bottom: 0; }
+.tutorCollege {
+  list-style: none;
+  margin-left: -0.5rem;
+  font-size: 1.1rem;
+  color: var(--white);
+  margin-bottom: 0.4rem;
+}
+.tutorCollege strong {
+  font-family: "Deacon", serif;
+  font-weight: 700;
+  color: var(--white);
+}
+
 /* ── Gallery ── */
 .gallerySection { padding: 3.5rem 0; }
 .galleryGrid {
@@ -314,6 +455,14 @@ section {
 .tierCard:hover { background: var(--white); transform: translateY(-2px); }
 .tierCard:hover .tierAmount,
 .tierCard:hover .tierLabel { color: var(--orange-dk); }
+.serviceCard {
+  background: rgba(255, 255, 255, 0.12);
+  border: 1.5px solid rgba(255, 255, 255, 0.24);
+  padding: 1.1rem 1rem 1rem;
+  display: block;
+  transition: opacity 0.15s, transform 0.12s;
+}
+.serviceCard:hover { opacity: 0.65; transform: translateY(-2px); }
 .tierAmount {
   font-size: 1.7rem;
   letter-spacing: 0.05em;
@@ -443,4 +592,6 @@ section {
   .statsGrid   { grid-template-columns: repeat(2, 1fr); }
   .galleryGrid { grid-template-columns: repeat(2, 1fr); }
   .tiersGrid   { grid-template-columns: repeat(2, 1fr); }
+  .tutorsGrid  { grid-template-columns: 1fr; }
+  .founderRow  { flex-direction: column; text-align: center; }
 }

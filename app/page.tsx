@@ -1,171 +1,193 @@
 import Image from "next/image";
 import { SITE } from "@/lib/data";
 import Accordion from "@/components/accordion";
-import GeoToggle from "@/components/geotoggle";
 import { socialIcons } from "@/components/social-icons";
 
 export default function Home() {
   return (
     <>
-      {/* Floating donate button */}
-      <a
-        className="donateFloat"
-        href={SITE.hero.donateLink}
-        target="_blank"
-        rel="noopener noreferrer"
-      >
-        {SITE.hero.donateLabel}
-      </a>
+      
+      <nav className="header">
+        <a href="#" className="logo">
+          <Image src="/imgs/logo.png" alt="Tutormigo" width={60} height={100} />
+          Tutormigo
+        </a>
+        <a className="donateFloat" href={SITE.hero.ctaLink} about="_blank">
+          {SITE.hero.ctaLabel}
+        </a>
+      </nav>
 
-      {/* Header */}
-      <header className="header">
-        <a href="#" className="logo">OMELORA</a>
-      </header>
-
-      {/* Hero */}
       <section className="heroSection">
         <div className="inner">
-          <h1 className='text-5xl md:text-7xl font-bold text-center text-orange uppercase ft-deacon'>
-            Omelora means{" "}
-            <span className="heroHash">#</span>
-            Changemaker.
+          <h1 className="text-5xl md:text-6xl font-bold text-center text-orange ft-deacon">
+            Affordable SAT Prep from students at Columbia, Yale, Harvard, and UT.
+            $30/hour.
           </h1>
-          <br/>
-          <p className="ft-athletics text-center text-2xl">{SITE.hero.subline}</p>
+          <br />
+          <p className="ft-athletics text-center text-2xl">
+            SAT/ACT, Academic Mentorship, & College Admissions Consulting.
+          </p>
         </div>
       </section>
 
-      {/* About */}
-
-      {/* Impact */}
       <section className="impactSection">
         <div className="inner">
-         {/*} <h2 className="ft-deacon text-5xl uppercase mb-6">Impact5</h2>*/}
-
-          <div className="flex flex-col md:flex-row gap-6 justify-center  items-center">
+          <div className="flex flex-col md:flex-row gap-6 justify-center items-center">
             {SITE.impact.stats.map((s) => (
-              <div key={s.label} className=" ">
+              <div key={s.label}>
                 <div className="ft-deacon text-center text-5xl">{s.number}</div>
-                <div className="ft-deacon text-center text-2xl uppercase">{s.label}</div>
+                <div className="ft-deacon text-center text-2xl uppercase">
+                  {s.label}
+                </div>
               </div>
             ))}
           </div>
-
-          <br/>
-          <br/>
-
-          <div className="highlights">
-            {SITE.impact.highlights.map((h) => (
-              <span key={h} className="highlightChip">{h}</span>
-            ))}
-          </div>
-
-         {/*} <div className="placesRow">
-            {SITE.impact.placeImpact.map((p) => (
-              <span key={p.city} className="placeChip">
-                {p.city}, {p.country}
-              </span>
-            ))}
-          </div>*/}
-
-          {/*<div className="geoToggles">
-            <GeoToggle
-              label={`${SITE.impact.countries.length} Countries`}
-              items={SITE.impact.countries}
-            />
-            <GeoToggle
-              label={`${SITE.impact.states.length} States`}
-              items={SITE.impact.states}
-            />
-          </div>*/}
         </div>
       </section>
 
-      {/* Gallery */}
-      <section className="gallerySection">
+      <section className="founderSection">
         <div className="inner">
-          <h2 className="ft-deacon text-5xl uppercase">{SITE.gallery.heading}</h2>
-          <br/>
-          <div className="galleryGrid">
-            {SITE.gallery.photos.map((ph, i) => (
-              <div key={i} className="galleryCell">
-                {ph.src ? (
+          <div className="ft-deacon text-5xl uppercase">Meet the Founder</div>
+          <br />
+          <div className="founderRow">
+            <div className="founderProfile">
+              <div className="founderPhoto">
+                {SITE.founder.photo ? (
                   <Image
-                    src={ph.src}
-                    alt={ph.alt}
+                    src={SITE.founder.photo}
+                    alt={SITE.founder.name}
                     fill
+                    sizes="160px"
                     style={{ objectFit: "cover" }}
                   />
                 ) : (
-                  <div className="galleryPlaceholder">{ph.alt}</div>
+                  <div className="founderPhotoPlaceholder">{SITE.founder.name}</div>
                 )}
+              </div>
+              <div className="tutorName">{SITE.founder.name}</div>
+            </div>
+            <div className="founderBio">
+              <p>{SITE.founder.bio}</p>
+              <a
+                className="ctaLink"
+                href={`mailto:${SITE.founder.email}`}
+              >
+                {SITE.founder.email}
+              </a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section className="tutorsSection">
+        <div className="inner">
+          <div className="ft-deacon text-5xl uppercase">Meet the Tutors</div>
+          <br />
+          <div className="tutorsGrid">
+            {SITE.tutors.map((tutor, i) => (
+              <div key={`${tutor.name}-${i}`} className="tutorCard">
+                <div className="tutorProfile">
+                  <div className="tutorAvatar">
+                    <div className="tutorAvatarInner">
+                      {tutor.photo ? (
+                        <Image
+                          src={tutor.photo}
+                          alt={tutor.name}
+                          fill
+                          sizes="72px"
+                          style={{ objectFit: "cover" }}
+                        />
+                      ) : (
+                        <div className="tutorAvatarPlaceholder">{tutor.name}</div>
+                      )}
+                    </div>
+                    {tutor.collegeLogo && (
+                      <div className="tutorCollegeLogo">
+                        <Image
+                          src={tutor.collegeLogo}
+                          alt={tutor.college}
+                          width={32}
+                          height={32}
+                          style={{ objectFit: "contain" }}
+                        />
+                      </div>
+                    )}
+                  </div>
+                  <div className="tutorName">{tutor.name}</div>
+                </div>
+                <ul className="tutorCredentials">
+                  <li className="tutorCollege">
+                    <strong>{tutor.college}</strong>
+                  </li>
+                  {tutor.credentials.map((c) => (
+                    <li key={c}>{c}</li>
+                  ))}
+                </ul>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* Get Involved */}
       <section className="getInvolvedSection">
         <div className="inner">
-          <div className="ft-deacon text-5xl uppercase">Get Involved</div>
-          <br/>
+          <div className="ft-deacon text-5xl uppercase">Services</div>
+          <br />
           <div className="tiersGrid">
-            {SITE.donateTiers.map((t) => (
-              <a
-                key={t.amount}
-                className="tierCard"
-                href={SITE.hero.donateLink}
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <div className="tierAmount">{t.amount}</div>
-                <div className="tierLabel">{t.label}</div>
-              </a>
+            {SITE.services.map((s) => (
+              <div key={s.title} className="serviceCard">
+                <div className="tierAmount">{s.title}</div>
+                <div className="tierLabel">{s.description}</div>
+              </div>
             ))}
           </div>
-
-          <Accordion items={SITE.getInvolved} />
         </div>
       </section>
 
-      {/* Programs */}
       <section className="programsSection">
         <div className="inner">
-          <div className="ft-deacon text-5xl uppercase">Programs</div>
-          <br/>
-          <Accordion items={SITE.programs} />
+          <div className="ft-deacon text-5xl uppercase">Referral Program</div>
+          <br />
+          <div className="accPanel">
+            <p>{SITE.referral.body}</p>
+            {SITE.referral.cta && (
+              <a className="ctaLink" href={SITE.referral.cta.href}>
+                {SITE.referral.cta.label}
+              </a>
+            )}
+          </div>
         </div>
       </section>
 
-      {/* Stay in Touch */}
+      <section className="programsSection">
+        <div className="inner">
+          <div className="ft-deacon text-5xl uppercase">FAQs</div>
+          <br />
+          <Accordion items={SITE.faqs} />
+        </div>
+      </section>
+
       <section className="socialSection">
         <div className="inner">
           <div className="ft-deacon text-5xl uppercase">Stay in Touch</div>
-          <br/>
+          <br />
           <div className="socialRow">
-            {SITE.social.map((s) => (
-              <a
-                key={s.platform}
-                className="socialLink"
-                href={s.href}
-                target={s.href.startsWith("mailto") ? "_self" : "_blank"}
-                rel="noopener noreferrer"
-              >
-                {socialIcons[s.icon]}
-                {s.platform}
-              </a>
-            ))}
+            <a
+              className="socialLink"
+              href={`mailto:${SITE.contact.email}`}
+            >
+              {socialIcons.email}
+              {SITE.contact.email}
+            </a>
           </div>
         </div>
       </section>
 
-      {/* Footer */}
       <footer className="footer">
         <div className="footerInner">
-          <p className="footerText">© 2025 Omelora. All rights reserved.</p>
-          <a className="footerLink" href="mailto:contact@omelora.org">
-            contact@omelora.org
+          <p className="footerText">© 2025 Tutormigo. All rights reserved.</p>
+          <a className="footerLink" href={`mailto:${SITE.contact.email}`}>
+            {SITE.contact.email}
           </a>
         </div>
       </footer>
