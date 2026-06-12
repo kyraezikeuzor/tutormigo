@@ -2,11 +2,12 @@ import type { Metadata } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "Tutormigo | Elite SAT Tutoring",
+  metadataBase: new URL("https://tutormigo.com"),
+  title: "Tutormigo — Elite SAT Tutoring",
   description:
     "Affordable SAT prep from students at Columbia, Yale, Harvard, and UT. $30/hour. SAT/ACT prep, academic mentorship, and college admissions consulting.",
   openGraph: {
-    title: "Tutormigo | Elite SAT Tutoring",
+    title: "Tutormigo — Elite SAT Tutoring",
     description:
       "Affordable SAT prep from Ivy & T20 students. Free first session. 1550+ avg tutor scores.",
     url: "https://tutormigo.com",
@@ -23,7 +24,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Tutormigo | Elite SAT Tutoring",
+    title: "Tutormigo — Elite SAT Tutoring",
     description:
       "Affordable SAT prep from Ivy & T20 students. Free first session. 1550+ avg tutor scores.",
     images: ["/imgs/opengraph.png"],
