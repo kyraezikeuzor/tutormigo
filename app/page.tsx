@@ -9,10 +9,21 @@ export default function Home() {
       
       <nav className="header">
         <a href="#" className="logo">
-          <Image src="/imgs/logo.png" alt="Tutormigo" width={60} height={100} />
+          <Image
+            src="/imgs/logo.png"
+            alt="Tutormigo"
+            width={60}
+            height={100}
+            className="logoImg"
+          />
           Tutormigo
         </a>
-        <a className="donateFloat" href={SITE.hero.ctaLink} about="_blank">
+        <a
+          className="donateFloat"
+          href={SITE.hero.ctaLink}
+          target="_blank"
+          rel="noopener noreferrer"
+        >
           {SITE.hero.ctaLabel}
         </a>
       </nav>
@@ -47,7 +58,7 @@ export default function Home() {
 
       <section className="founderSection">
         <div className="inner">
-          <div className="ft-deacon text-5xl uppercase">Meet the Founder</div>
+          <div className="founderTitle ft-deacon text-5xl uppercase">Meet the Founder</div>
           <br />
           <div className="founderRow">
             <div className="founderProfile">
@@ -94,7 +105,7 @@ export default function Home() {
                           src={tutor.photo}
                           alt={tutor.name}
                           fill
-                          sizes="72px"
+                          sizes="(max-width: 767px) 96px, 72px"
                           style={{ objectFit: "cover" }}
                         />
                       ) : (
