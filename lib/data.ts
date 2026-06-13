@@ -49,7 +49,7 @@ export const SITE: SiteData = {
   impact: {
     stats: [
       { number: "1550", label: "Tutor SAT Score" },
-      { number: "$25", label: "Per Hour With Referral" },
+      { number: "1", label: "Free Session With Referral" },
       { number: "FREE", label: "First Session" },
       { number: "83%", label: "Cheaper Than Ivy Standard" },
       
@@ -303,7 +303,7 @@ export const SITE: SiteData = {
   referral: {
     id: "referral",
     label: "Referral Program",
-    body: "Refer a friend and unlock $25/hour tutoring — our best rate. To get your referral code, email koe2103@columbia.edu or call us. When your referral applies, they must mention they were referred by you.",
+    body: "Refer a friend and get one free tutoring session. To get your referral code, email koe2103@columbia.edu or call us. When your referral applies, they must mention they were referred by you.",
     cta: { label: "Get Your Referral Code", href: "mailto:koe2103@columbia.edu" },
   },
 
