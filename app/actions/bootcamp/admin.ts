@@ -693,32 +693,27 @@ function answersMatch(selected: string | null | undefined, correct: string) {
   return !Number.isNaN(an) && !Number.isNaN(bn) && an === bn;
 }
 
-/** Lists the dedicated Practice Test 1 runs for an admin's student view. */
+/** Lists all dedicated practice-test runs for an admin's student view. */
 export async function getAdminStudentPracticeTests(
   studentId: string
 ): Promise<AdminPracticeTestRunSummary[]> {
   await requireAdmin();
   const admin = createAdminClient();
-  const { data: test } = await admin
-    .from("tests")
-    .select("id,title")
-    .eq("title", "Practice Test 1")
-    .maybeSingle();
-  if (!test) return [];
-
-  const [{ data: runs }, { data: links }] = await Promise.all([
-    admin
-      .from("test_runs")
-      .select("id,status,started_at,completed_at")
-      .eq("test_id", test.id)
-      .eq("user_id", studentId)
-      .order("started_at", { ascending: false }),
-    admin.from("test_questions").select("question_id").eq("test_id", test.id),
-  ]);
+  const { data: runs } = await admin
+    .from("test_runs")
+    .select("id,test_id,status,started_at,completed_at")
+    .eq("user_id", studentId)
+    .order("started_at", { ascending: false });
   const runRows = runs ?? [];
-  const questionIds = (links ?? []).map((row) => String(row.question_id));
   if (!runRows.length) return [];
+
+  const testIds = [...new Set(runRows.map((run) => String(run.test_id)))];
+  const [{ data: tests }, { data: links }] = await Promise.all([
+    admin.from("tests").select("id,title").in("id", testIds),
+    admin.from("test_questions").select("test_id,question_id").in("test_id", testIds),
+  ]);
   const runIds = runRows.map((row) => String(row.id));
+  const questionIds = [...new Set((links ?? []).map((row) => String(row.question_id)))];
   const [{ data: attempts }, { data: feedback }] = await Promise.all([
     admin.from("test_attempts").select("run_id,question_id").in("run_id", runIds),
     questionIds.length
@@ -731,14 +726,28 @@ export async function getAdminStudentPracticeTests(
     if (!answeredByRun.has(id)) answeredByRun.set(id, new Set());
     answeredByRun.get(id)!.add(String(attempt.question_id));
   }
+  const testsById = new Map((tests ?? []).map((test) => [String(test.id), String(test.title)]));
+  const questionsByTest = new Map<string, Set<string>>();
+  for (const link of links ?? []) {
+    const id = String(link.test_id);
+    if (!questionsByTest.has(id)) questionsByTest.set(id, new Set());
+    questionsByTest.get(id)!.add(String(link.question_id));
+  }
   const reportedQuestions = new Set((feedback ?? []).map((row) => String(row.question_id)));
-  return runRows.map((run) => ({
-    run_id: String(run.id), test_id: String(test.id), title: String(test.title),
-    status: run.status === "completed" ? "completed" : "in_progress",
-    started_at: String(run.started_at), completed_at: run.completed_at ? String(run.completed_at) : null,
-    answered: answeredByRun.get(String(run.id))?.size ?? 0,
-    total: questionIds.length, reported_questions: reportedQuestions.size,
-  }));
+  return runRows.flatMap((run) => {
+    const testId = String(run.test_id);
+    const title = testsById.get(testId);
+    if (!title) return [];
+    const testQuestions = questionsByTest.get(testId) ?? new Set<string>();
+    return [{
+      run_id: String(run.id), test_id: testId, title,
+      status: run.status === "completed" ? "completed" as const : "in_progress" as const,
+      started_at: String(run.started_at), completed_at: run.completed_at ? String(run.completed_at) : null,
+      answered: answeredByRun.get(String(run.id))?.size ?? 0,
+      total: testQuestions.size,
+      reported_questions: [...testQuestions].filter((questionId) => reportedQuestions.has(questionId)).length,
+    }];
+  });
 }
 
 /** Detailed run review. A student-reported test item receives score credit. */
@@ -755,7 +764,7 @@ export async function getAdminPracticeTestRunDetail(
     .eq("user_id", studentId)
     .maybeSingle();
   if (!run) return null;
-  const { data: test } = await admin.from("tests").select("id,title").eq("id", run.test_id).eq("title", "Practice Test 1").maybeSingle();
+  const { data: test } = await admin.from("tests").select("id,title").eq("id", run.test_id).maybeSingle();
   if (!test) return null;
   const { data: links } = await admin
     .from("test_questions")

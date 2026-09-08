@@ -43,10 +43,10 @@ export default async function AdminStudentDetailPage({ params }: { params: { stu
       </section>
       <section className="mt-10 space-y-4">
         <h2 className="font-sans text-base font-semibold text-arc-ink">Practice Tests</h2>
-        {practiceTests.length === 0 ? <p className="font-sans text-sm text-arc-muted">No Practice Test 1 attempts yet.</p> : practiceTests.map((test, index) => (
+        {practiceTests.length === 0 ? <p className="font-sans text-sm text-arc-muted">No practice test attempts yet.</p> : practiceTests.map((test) => (
           <Link key={test.run_id} href={`/admin/students/${detail.student_id}/practice-tests/${test.run_id}`} className="block rounded-2xl border-2 border-arc-line bg-white p-5 transition hover:border-arc-accent">
             <div className="flex flex-wrap items-center justify-between gap-4">
-              <div><h3 className="font-semibold text-arc-ink">{test.title}{practiceTests.length > 1 ? ` · Attempt ${practiceTests.length - index}` : ""}</h3><p className="mt-1 text-xs text-arc-muted">{test.status === "completed" ? "Completed" : "In progress"} · {test.answered}/{test.total} answered</p></div>
+              <div><h3 className="font-semibold text-arc-ink">{test.title}</h3><p className="mt-1 text-xs text-arc-muted">{test.status === "completed" ? "Completed" : "In progress"} · {test.answered}/{test.total} answered</p></div>
               <div className="text-right"><p className="arc-card-label">Reported issues</p><p className="mt-1 font-medium text-arc-ink">{test.reported_questions}</p></div>
             </div>
           </Link>
